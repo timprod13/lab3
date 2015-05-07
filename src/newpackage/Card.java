@@ -24,4 +24,7 @@ public class Card {
         return name;
     }
     
+    public String getSuitName (){
+        return "";
+    }
 }

@@ -30,4 +30,13 @@ public class CardTest {
         assertEquals("Card неверен",name, result);
     }
     
+    @Test
+    public void testGetSuitName() {
+        System.out.println("getName");
+        String name = "Крести";
+        Card instance = new Card("Валет",new Suit(name));
+        String result = instance.getSuitName();
+        assertEquals("Card неверен",name, result);
+    }
+    
 }
