@@ -25,6 +25,6 @@ public class Card {
     }
     
     public String getSuitName (){
-        return "";
+        return suit.getName();
     }
 }
