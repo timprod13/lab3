@@ -22,4 +22,7 @@ public class User {
      public ArrayList<Card> getDeck(){
          return list;
      }
+     
+     public void addCard(Card card){
+     }
 }

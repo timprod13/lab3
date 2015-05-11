@@ -20,4 +20,12 @@ public class UserTest {
         User user = new User();
         if(user.getDeck()==null) fail("list не существует!");
     }
+    
+    @Test
+    public void testAddCard(){
+        User user = new User();
+        user.addCard(new Card("6",new Suit ("Крести")));
+        if(user.getDeck().isEmpty()) fail("add не add!");
+        //System.out.println(user.getDeck().size());
+    }
 }
