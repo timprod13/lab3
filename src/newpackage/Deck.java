@@ -40,6 +40,7 @@ public class Deck {
     }
     
     public Card getCard(){
+        if(!stack.isEmpty()){return stack.pop();}
         return null;
     }
     

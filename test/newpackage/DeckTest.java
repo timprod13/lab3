@@ -29,6 +29,6 @@ public class DeckTest {
        for(int i=0;i<36;i++){
            if(deck.getCard()!=null) count++;
        }
-       assertEquals("Не хватает карт в колоде!",count,35);
+       assertEquals("Не хватает карт в колоде!",count,36);
    }
 }
