@@ -28,6 +28,7 @@ public class User {
      }
      
      public void removeCard(int index){
+         list.remove(index);
      }
      
 }
