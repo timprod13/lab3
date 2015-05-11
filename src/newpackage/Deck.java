@@ -51,7 +51,7 @@ public class Deck {
     }
     
     public int getSize(){
-        return -1;
+        return stack.size();
     }
     
     public Deck() {
