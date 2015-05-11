@@ -34,9 +34,13 @@ public class Deck {
                 stack.set(index2,a1);
             }
         }
-        for(int i=0;i<36;i++){
+        /*for(int i=0;i<36;i++){
         stack.get(i);
-        System.out.println(stack.get(i).getName() +" "+ stack.get(i).getSuitName());}
+        System.out.println(stack.get(i).getName() +" "+ stack.get(i).getSuitName());}*/
+    }
+    
+    public Card getCard(){
+        return null;
     }
     
     public Deck() {

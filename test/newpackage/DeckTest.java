@@ -6,6 +6,7 @@
 
 package newpackage;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
@@ -19,4 +20,15 @@ public class DeckTest {
        Deck deck = new Deck();
        deck.generate();
     }
+   
+   @Test
+   public void testGetCard(){
+       Deck deck = new Deck();
+       deck.generate();
+       int count = 0;
+       for(int i=0;i<36;i++){
+           if(deck.getCard()!=null) count++;
+       }
+       assertEquals("Не хватает карт в колоде!",count,35);
+   }
 }
