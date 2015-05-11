@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package newpackage;
+
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +27,10 @@ public class Main extends javax.swing.JFrame {
     public User user2;
     public Deck deck;
     public int activeUser;
+    public ArrayList<Card> card1;
+    public ArrayList<Card> card2;
+    public Card lastCard;
+    public int whoFight;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -99,9 +107,9 @@ public class Main extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(135, 135, 135))
         );
 
         jList1.setModel(new javax.swing.AbstractListModel() {
@@ -109,12 +117,22 @@ public class Main extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jList2.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList2MouseClicked(evt);
+            }
         });
         jScrollPane2.setViewportView(jList2);
 
@@ -130,10 +148,18 @@ public class Main extends javax.swing.JFrame {
         });
 
         jButton2.setText("Взять");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("36");
+        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextField1.setEnabled(false);
 
-        jTextField2.setText("jTextField2");
+        jTextField2.setText("Нет");
+        jTextField2.setEnabled(false);
 
         jLabel4.setText("Количество карт в колоде:");
 
@@ -160,33 +186,33 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2))
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel4))
+                                        .addGap(66, 66, 66)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextField1)
+                                            .addComponent(jTextField2))))
+                                .addGap(11, 11, 11))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addGap(74, 74, 74)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(58, 58, 58)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(331, 439, Short.MAX_VALUE)))
                 .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(jLabel1)
@@ -195,49 +221,326 @@ public class Main extends javax.swing.JFrame {
                         .addGap(58, 58, 58)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addContainerGap(22, Short.MAX_VALUE))
+                            .addComponent(jLabel5))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(41, 41, 41))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
-                        .addGap(41, 41, 41))))
+                            .addComponent(jButton2))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void clearTable(){
+        int rowCount = jTable1.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            jTable1.setValueAt("", i, 0);
+            jTable1.setValueAt("", i, 1);
+        }
 
+}
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        clearTable();
+        card1.clear();
+        card2.clear();
+        lastCard = null;
+        if(whoFight == 1) {
+            whoFight = 2;
+            activeUser = 1;
+        } else {
+            whoFight = 1;
+            activeUser = 2;
+        }
+        for(int i=0;user1.getDeck().size()<6;i++){
+            Card a = deck.getCard();
+            if(a != null)   user1.addCard(a);
+            else break;
+        }
+        for(int i=0;user2.getDeck().size()<6;i++){
+            Card a = deck.getCard();
+            if(a != null)   user2.addCard(a);
+            else break;
+        }
+        outCard();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         user1 = new User();
         user2 = new User();
+        card1 = new ArrayList<Card>();
+        card2 = new ArrayList<Card>();
+        lastCard = null;
         deck = new Deck();
         deck.generate();
-        for(int i=0;i<5;i++){
+        for (int i = 0; i < 6; i++) {
             user1.addCard(deck.getCard());
             user2.addCard(deck.getCard());
         }
         activeUser = 1;
-        if(user1.getMinTrump(deck.getTrump()).compare(user2.getMinTrump(deck.getTrump()))==1) activeUser = 2;
-      //  if(activeUser = 1) 
-      //  jTextField1.setText();
-        jTextField1.setText(deck.getTrump().getName());
+        if (user1.getMinTrump(deck.getTrump()).compare(user2.getMinTrump(deck.getTrump())) == 1) {
+            activeUser = 2;
+        }
+        if (activeUser == 1) {
+            jList1.setVisible(false);
+            jList2.setVisible(true);
+            whoFight = 2;
+        } else {
+            jList1.setVisible(true);
+            jList2.setVisible(false);
+            whoFight = 1;
+        }
+        jTextField1.setText(deck.getSize() + "");
+        jTextField2.setText(deck.getTrump().getName());
+        outCard();
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
+        // if(activeUser == 1)userTurn1();
+        if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+            evt.consume();
+            userTurn1();
+
+     //handle double click event.
+        }
+
+    }//GEN-LAST:event_jList2MouseClicked
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+
+        if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+            evt.consume();
+            userTurn2();
+
+     //handle double click event.
+        }
+    }//GEN-LAST:event_jList1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        for(int i=0;i<card1.size();i++){
+           if (whoFight == 1) {
+              user1.addCard(card1.get(i));
+        } else user2.addCard(card1.get(i));
+        }
+        
+        for(int i=0;i<card2.size();i++){
+           if (whoFight == 1) {
+              user1.addCard(card2.get(i));
+        } else user2.addCard(card2.get(i));
+        }
+        lastCard = null;
+        card1.clear();
+        card2.clear();
+        if(whoFight == 1) activeUser = 2;
+        else activeUser = 1;
+        for(int i=0;user1.getDeck().size()<6;i++){
+            Card a = deck.getCard();
+            if(a != null)   user1.addCard(a);
+            else break;
+        }
+        for(int i=0;user2.getDeck().size()<6;i++){
+            Card a = deck.getCard();
+            if(a != null)   user2.addCard(a);
+            else break;
+        }
+        outCard();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void userTurn1() {
+        if (whoFight == 1) {
+            int selectedIndex = jList2.getSelectedIndex();
+            String selectedValue = jList2.getSelectedValue().toString();
+            String[] arr = selectedValue.split(" ");
+            Card card = new Card(arr[0], new Suit(arr[1]));
+            if (lastCard.compare(card) == -1) {
+                if (lastCard.getSuitName().equals(card.getSuitName())) {
+                    card1.add(card);
+                    user1.removeCard(selectedIndex);
+                    activeUser = 2;
+                    outCard();
+                } else if (card.getSuitName().equals(deck.getTrump().getName())) {
+                    card1.add(card);
+                    user1.removeCard(selectedIndex);
+                    activeUser = 2;
+                    outCard();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Не бьёт!");
+                }
+            } else {
+                if (card.getSuitName().equals(deck.getTrump().getName()) && !lastCard.getSuitName().equals(card.getSuitName())) {
+                    card1.add(card);
+                    user1.removeCard(selectedIndex);
+                    activeUser = 2;
+                    outCard();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Не бьёт!");
+                }
+            }
+        } else {
+            int selectedIndex = jList2.getSelectedIndex();
+            String selectedValue = jList2.getSelectedValue().toString();
+            String[] arr = selectedValue.split(" ");
+            Card card = new Card(arr[0], new Suit(arr[1]));
+            if (card1.size() == 0 && card2.size() == 0) {
+                card1.add(card);
+                lastCard = card;
+                user1.removeCard(selectedIndex);
+                activeUser = 2;
+                outCard();
+            } else {
+                int size1 = card1.size();
+                boolean faq = false;
+                for (int i = 0; i < size1; i++) {
+                    if (card1.get(i).getName().equals(card.getName())) {
+                        faq = true;
+                        break;
+                    }
+                }
+                if (!faq) {
+                    int size2 = card2.size();
+                    for (int i = 0; i < size2; i++) {
+                        if (card2.get(i).getName().equals(card.getName())) {
+                            faq = true;
+                            break;
+                        }
+                    }
+                }
+                if (faq) {
+                    card1.add(card);
+                    lastCard = card;
+                    user1.removeCard(selectedIndex);
+                    activeUser = 2;
+                    outCard();
+                }
+            }
+        }
+    }
+
+    public void userTurn2() {
+        if (whoFight == 2) {
+            int selectedIndex = jList1.getSelectedIndex();
+            String selectedValue = jList1.getSelectedValue().toString();
+            String[] arr = selectedValue.split(" ");
+            Card card = new Card(arr[0], new Suit(arr[1]));
+            if (lastCard.compare(card) == -1) {
+                if (lastCard.getSuitName().equals(card.getSuitName())) {
+                    card2.add(card);
+                    user2.removeCard(selectedIndex);
+                    activeUser = 1;
+                    outCard();
+                } else if (card.getSuitName().equals(deck.getTrump().getName())) {
+                    card2.add(card);
+                    user2.removeCard(selectedIndex);
+                    activeUser = 1;
+                    outCard();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Не бьёт!");
+                }
+            } else {
+                if (card.getSuitName().equals(deck.getTrump().getName()) && !lastCard.getSuitName().equals(card.getSuitName())) {
+                    card2.add(card);
+                    user2.removeCard(selectedIndex);
+                    activeUser = 1;
+                    outCard();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Не бьёт!");
+                }
+            }
+        } else {
+            int selectedIndex = jList1.getSelectedIndex();
+            String selectedValue = jList1.getSelectedValue().toString();
+            String[] arr = selectedValue.split(" ");
+            Card card = new Card(arr[0], new Suit(arr[1]));
+            if (card2.size() == 0 && card1.size() == 0) {
+                card2.add(card);
+                lastCard = card;
+                user2.removeCard(selectedIndex);
+                activeUser = 1;
+                outCard();
+            } else {
+                int size1 = card1.size();
+                boolean faq = false;
+                for (int i = 0; i < size1; i++) {
+                    if (card1.get(i).getName().equals(card.getName())) {
+                        faq = true;
+                        break;
+                    }
+                }
+                if (!faq) {
+                    int size2 = card2.size();
+                    for (int i = 0; i < size2; i++) {
+                        if (card2.get(i).getName().equals(card.getName())) {
+                            faq = true;
+                            break;
+                        }
+                    }
+                }
+                if (faq) {
+                    card2.add(card);
+                    lastCard = card;
+                    user2.removeCard(selectedIndex);
+                    activeUser = 1;
+                    outCard();
+                }
+            }
+        }
+    }
+
+    public void outCard() {
+        ArrayList<Card> card1 = user1.getDeck();
+        ArrayList<Card> card2 = user2.getDeck();
+        if(deck.getSize()==0){
+        if(card1.size()==0 && card2.size()==0) JOptionPane.showMessageDialog(this, "Ничья!");
+        else if(card1.size()==0) JOptionPane.showMessageDialog(this, "Победил игрок 1!");
+        else if(card2.size()==0) JOptionPane.showMessageDialog(this, "Победил игрок 2!");}
+        DefaultListModel lm2 = new DefaultListModel();
+        DefaultListModel lm1 = new DefaultListModel();
+        jList2.setModel(lm2);
+        jList1.setModel(lm1);
+        for (int i = 0; i < card1.size(); i++) {
+            lm2.addElement(card1.get(i).getName() + " " + card1.get(i).getSuitName());
+        }
+        for (int i = 0; i < card2.size(); i++) {
+            lm1.addElement(card2.get(i).getName() + " " + card2.get(i).getSuitName());
+        }
+        if (activeUser == 1) {
+            jList1.setVisible(false);
+            jList2.setVisible(true);
+        } else {
+            jList1.setVisible(true);
+            jList2.setVisible(false);
+        }
+       clearTable();
+        for (int i = 0; i < this.card1.size(); i++) {
+            jTable1.setValueAt(this.card1.get(i).getName()+' '+this.card1.get(i).getSuitName(), i, 0);
+            
+        }
+        for (int i = 0; i < this.card2.size(); i++) {
+            jTable1.setValueAt(this.card2.get(i).getName()+' '+this.card2.get(i).getSuitName(), i, 1);
+            
+        }
+        jTextField1.setText(deck.getSize() + "");
+    }
 
     /**
      * @param args the command line arguments
