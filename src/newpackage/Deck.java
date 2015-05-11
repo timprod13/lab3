@@ -50,6 +50,10 @@ public class Deck {
         return trump;
     }
     
+    public int getSize(){
+        return -1;
+    }
+    
     public Deck() {
         stack = new Stack<>();
     }

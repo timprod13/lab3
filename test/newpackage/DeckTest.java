@@ -39,4 +39,11 @@ public class DeckTest {
        deck.generate();
        if (deck.getTrump() == null) fail("Нет козыря!");
    }
+   
+   @Test
+   public void testGetSize(){
+       Deck deck = new Deck();
+       deck.generate();
+       assertEquals("Неправильное кол-во карт!",deck.getSize(),36);
+   }
 }
