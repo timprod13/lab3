@@ -16,6 +16,7 @@ import java.util.Stack;
 public class Deck {
     private Stack <Card> stack;
     private int countshake=100;
+    private Suit trump;
     public void generate(){
         String[] cardname = {"6","7","8","9","10","Валет","Дама","Король","Туз"};
         String[] suitname = {"Черви","Бубны","Трефы","Крести"};
@@ -34,6 +35,7 @@ public class Deck {
                 stack.set(index2,a1);
             }
         }
+        trump = new Suit(suitname[rand.nextInt(4)]);
         /*for(int i=0;i<36;i++){
         stack.get(i);
         System.out.println(stack.get(i).getName() +" "+ stack.get(i).getSuitName());}*/
@@ -41,6 +43,10 @@ public class Deck {
     
     public Card getCard(){
         if(!stack.isEmpty()){return stack.pop();}
+        return null;
+    }
+    
+    public Suit getTrump(){
         return null;
     }
     

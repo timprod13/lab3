@@ -7,6 +7,7 @@
 package newpackage;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -30,5 +31,12 @@ public class DeckTest {
            if(deck.getCard()!=null) count++;
        }
        assertEquals("Не хватает карт в колоде!",count,36);
+   }
+   
+   @Test
+   public void testGetTrump(){
+       Deck deck = new Deck();
+       deck.generate();
+       if (deck.getTrump() == null) fail("Нет козыря!");
    }
 }
