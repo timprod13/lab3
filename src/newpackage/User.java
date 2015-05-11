@@ -32,7 +32,11 @@ public class User {
      }
      
      public Card getMinTrump(Suit trump){
-         return null;
+         Card min = list.get(0);
+         for (int i=1;i<list.size();i++){
+             if(list.get(i).compare(min) == -1) min =  list.get(i);
+         }
+         return min;
      }
      
 }
