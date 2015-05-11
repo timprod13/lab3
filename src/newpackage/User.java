@@ -26,4 +26,8 @@ public class User {
      public void addCard(Card card){
          list.add(card);
      }
+     
+     public void removeCard(int index){
+     }
+     
 }

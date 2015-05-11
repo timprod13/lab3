@@ -28,4 +28,14 @@ public class UserTest {
         if(user.getDeck().isEmpty()) fail("add не add!");
         //System.out.println(user.getDeck().size());
     }
+    
+    @Test
+    public void testRemoveCard(){
+        User user = new User();
+        user.addCard(new Card("6",new Suit ("Крести")));
+        user.addCard(new Card("7",new Suit ("Крести")));
+        user.addCard(new Card("8",new Suit ("Крести")));
+        user.removeCard(2);
+        if(user.getDeck().size() != 2) fail("remove не remove!");
+    }
 }
