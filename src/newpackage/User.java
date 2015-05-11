@@ -31,4 +31,8 @@ public class User {
          list.remove(index);
      }
      
+     public Card getMinTrump(Suit trump){
+         return null;
+     }
+     
 }

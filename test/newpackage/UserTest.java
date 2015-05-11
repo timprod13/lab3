@@ -38,4 +38,17 @@ public class UserTest {
         user.removeCard(2);
         if(user.getDeck().size() != 2) fail("remove не remove!");
     }
+
+     @Test
+    public void testGetMinTrump(){
+        User user = new User();
+        user.addCard(new Card("6",new Suit ("Крести")));
+        user.addCard(new Card("7",new Suit ("Крести")));
+        user.addCard(new Card("8",new Suit ("Червы")));
+        user.addCard(new Card("6",new Suit ("Бубны")));
+        user.addCard(new Card("7",new Suit ("Бубны")));
+        user.addCard(new Card("8",new Suit ("Крести")));
+        if(user.getMinTrump(new Suit("Крести")) == null) fail("getmin не getmin!");
+    }
 }
+
