@@ -24,5 +24,6 @@ public class User {
      }
      
      public void addCard(Card card){
+         list.add(card);
      }
 }
