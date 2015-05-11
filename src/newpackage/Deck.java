@@ -47,7 +47,7 @@ public class Deck {
     }
     
     public Suit getTrump(){
-        return null;
+        return trump;
     }
     
     public Deck() {
