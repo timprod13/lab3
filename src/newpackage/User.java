@@ -20,6 +20,6 @@ public class User {
      }
      
      public ArrayList<Card> getDeck(){
-         return null;
+         return list;
      }
 }
